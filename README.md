@@ -1,1 +1,1 @@
-javascript calculator
+another day another gay project
