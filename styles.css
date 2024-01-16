@@ -1,6 +1,7 @@
 body{
     display: flex;
     justify-content: center;
+    background-color: #966F33;
 }
 .container{
     margin-top: 150px;
@@ -21,6 +22,18 @@ body{
     border-radius: 12px;
     margin-top: 25px;
     background-color: #CCCCCC;
+    display: flex;
+    flex-direction: column;
+}
+.show, .result{
+    flex: 1;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+.text{
+    font-size: 30px;
+    margin: 10px;
 }
 .buttons{
     flex: 1,1,auto;
@@ -44,16 +57,13 @@ body{
     width: 100px;
     margin: 5px;
     border: solid white 2px;
+    font-weight: bold;
     border-radius: 12px;
 }
 .button{
     width: 50px;
     border: solid white 2px;
     border-radius: 12px;
+    font-weight: bold;
     margin: 5px;
-}
-.second{
-    flex: 1;
-    height: 50px;
-    width: 50px;
 }
