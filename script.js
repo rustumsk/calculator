@@ -2,7 +2,8 @@ let num1;
 let num2;
 let operator;
 let count = 0;
-let display = document.querySelector(".text")
+let display = document.querySelector(".text");
+let result = document.querySelector(".upperText");
 
 let buttons = document.querySelectorAll(".button");
 let deleteButton = document.querySelector(".delete")
@@ -12,10 +13,19 @@ let deleteButton = document.querySelector(".delete")
     })
 let clearButton = document.querySelector(".clear")
     .addEventListener("click",() => {
-        let lastChild = display.lastChild;
-        display.removeChild(lastChild);
+        display.removeChild(display.lastChild);
+        result.removeChild(result.lastChild);
         count = 0;
     })
+
+let equalButton = document.querySelector(".equal").
+    addEventListener("click", () =>{
+            operator = checkOperator(display.textContent);
+            let nums = display.textContent.split(operator);
+            display.textContent = operateNum(operator,parseInt(nums[0]),parseInt(nums[1]));
+            count = 0;
+    })
+
 buttons.forEach((button) =>{
     button.addEventListener("click",() =>{
         if(button.textContent === "+" || button.textContent === "-"
@@ -26,7 +36,8 @@ buttons.forEach((button) =>{
         if (count === 2){
             operator = checkOperator(display.textContent);
             let nums = display.textContent.split(operator);
-            display.textContent = operateNum(operator,parseInt(nums[0]),parseInt(nums[1]));
+            result.textContent = operateNum(operator,parseInt(nums[0]),parseInt(nums[1])) + button.textContent;
+            display.removeChild(display.lastChild);
             count = 0;
         }
         else{
