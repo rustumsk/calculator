@@ -13,8 +13,12 @@ let deleteButton = document.querySelector(".delete")
     })
 let clearButton = document.querySelector(".clear")
     .addEventListener("click",() => {
-        display.removeChild(display.lastChild);
-        result.removeChild(result.lastChild);
+        if (display.textContent !== "" && result.textContent === "") display.removeChild(display.lastChild);
+        else if (result.textContent !== "" && display.textContent === "") result.removeChild(result.lastChild);
+        else{
+            display.removeChild(display.lastChild);
+            result.removeChild(result.lastChild);
+        }
         count = 0;
     })
 
@@ -28,10 +32,18 @@ let equalButton = document.querySelector(".equal").
 
 buttons.forEach((button) =>{
     button.addEventListener("click",() =>{
-        if(button.textContent === "+" || button.textContent === "-"
-        || button.textContent === "*" || button.textContent === "/"
-        || button.textContent === "^"){
-            count++;
+        if(checkOp(button)){
+            if(result.textContent !== ""){
+                operator = checkOperator(result.textContent);
+                let number = (result.textContent + display.textContent).split(operator);
+                result.textContent = operateNum(operator, parseInt(number[0]), parseInt(number[1])) + button.textContent;
+                display.removeChild(display.lastChild);
+                count = 0;
+                return;
+            }
+            else{
+                count++
+            }
         }
         if (count === 2){
             operator = checkOperator(display.textContent);
@@ -45,7 +57,39 @@ buttons.forEach((button) =>{
         }
     })
 })
+buttons.forEach((button) => {
+    button.addEventListener("mouseover", () =>{
+        if (checkOp(button)){
+            button.style.backgroundColor = "white";
+            button.style.color = "black";
+        }
+        else{
+            button.style.backgroundColor = "black";
+            button.style.color = "white";
+        }
+    })
+})
 
+buttons.forEach((button) => {
+    button.addEventListener("mouseout", () =>{
+        if (checkOp(button)){
+            button.style.backgroundColor = "black";
+            button.style.color = "white";
+        }
+        else{
+            button.style.backgroundColor = "white";
+            button.style.color = "black";
+        }
+    })
+})
+function checkOp(button){
+    if(button.textContent === "+" || button.textContent === "-"
+        || button.textContent === "*" || button.textContent === "/"
+        || button.textContent === "^"){
+        return true
+    }
+    else return false;
+}
 function operateNum(operator,num1,num2){
     switch (operator){
         case "+":
