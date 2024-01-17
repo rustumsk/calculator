@@ -1,1 +1,1 @@
-another day another gay project
+See Live Preview here: https://rustumsk.github.io/calculator/
