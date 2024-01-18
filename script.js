@@ -24,10 +24,19 @@ let clearButton = document.querySelector(".clear")
 
 let equalButton = document.querySelector(".equal").
     addEventListener("click", () =>{
-            operator = checkOperator(display.textContent);
-            let nums = display.textContent.split(operator);
-            display.textContent = operateNum(operator,parseInt(nums[0]),parseInt(nums[1]));
-            count = 0;
+            if(result.textContent !== ""){
+                operator = checkOperator(result.textContent);
+                let number = (result.textContent + display.textContent).split(operator);
+                display.textContent = operateNum(operator, parseInt(number[0]), parseInt(number[1]));
+                result.removeChild(result.lastChild);
+                count = 0;
+            }
+            else{
+                operator = checkOperator(display.textContent);
+                let nums = display.textContent.split(operator);
+                display.textContent = operateNum(operator,parseInt(nums[0]),parseInt(nums[1]));
+                count = 0;
+            }
     })
 
 buttons.forEach((button) =>{
